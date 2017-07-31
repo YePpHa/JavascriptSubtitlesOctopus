@@ -138,12 +138,12 @@ build/subtitles-octopus/subtitles-octopus-worker.bc: build/subtitles-octopus/con
 EMCC_COMMON_ARGS = \
 	-s TOTAL_MEMORY=134217728 \
 	-O3 \
-	-s EXPORTED_FUNCTIONS="['_main', '_malloc', '_libassjs_init', '_libassjs_quit', '_libassjs_resize', '_libassjs_render']" \
+	-s EXPORTED_FUNCTIONS="['_main', '_malloc', '_libassjs_free_track', '_libassjs_create_track', '_libassjs_init', '_libassjs_quit', '_libassjs_resize', '_libassjs_render']" \
 	-s NO_EXIT_RUNTIME=1 \
 	--use-preload-plugins \
-	--preload-file default.ttf \
-	--preload-file fonts.conf \
 	-s ALLOW_MEMORY_GROWTH=1 \
+	--memory-init-file 0 \
+	-s ASSERTIONS=0 \
 	-o $@
 	#TODO: try to find "best total memory" again and disable ALLOW_MEMORY_GROWTH
 	#--js-opts 0 -g4 \

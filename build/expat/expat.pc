@@ -1,4 +1,4 @@
-prefix=/home/user/libass.js/build/expat/dist
+prefix=/home/jinpha/Projects/JavascriptSubtitlesOctopus/build/expat/dist
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

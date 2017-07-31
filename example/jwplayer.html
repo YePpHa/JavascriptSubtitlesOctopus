@@ -38,7 +38,11 @@
                 fonts: ['/example/font-1.ttf', '/example/font-2.ttf'],
                 //onReady: onReadyFunction,
                 //debug: true,
-                workerUrl: '/js/subtitles-octopus-worker.js'
+                workerUrl: '/js/subtitles-octopus-worker.js',
+                files: {
+                    'fonts.conf': { url: '/fonts.conf' },
+                    'default.ttf': { url: '/default.ttf' }
+                }
             };
             window.octopusInstance = new SubtitlesOctopus(options); // You can experiment in console
         };

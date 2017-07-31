@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "ftobjs.h": "c",
+    "psaux.h": "c",
+    "*.tcc": "c",
+    "ass_library.h": "c",
+    "stdio2.h": "c",
+    "ass_render.h": "c"
+  }
+}

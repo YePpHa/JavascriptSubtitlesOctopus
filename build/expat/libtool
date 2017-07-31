@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status () 
-# Libtool was configured on host ubuntu:
+# Libtool was configured on host Maia:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -96,7 +96,7 @@ EGREP="/bin/grep -E"
 FGREP="/bin/grep -F"
 
 # A BSD- or MS-compatible name lister.
-NM="/home/user/emsdk_portable/clang/fastcomp/build_master_64/bin/llvm-nm"
+NM="/home/jinpha/Documents/emsdk-portable/clang/fastcomp/build_incoming_64/bin/llvm-nm"
 
 # Whether we need soft or hard links.
 LN_S="ln -s"
@@ -141,7 +141,7 @@ want_nocaseglob="no"
 sharedlib_from_linklib_cmd="printf %s\\n"
 
 # The archiver.
-AR="/home/user/emsdk_portable/emscripten/master/emar"
+AR="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/emar"
 
 # Flags to create an archive.
 AR_FLAGS="cru"
@@ -153,7 +153,7 @@ archiver_list_spec=""
 STRIP="strip"
 
 # Commands used to install an old-style archive.
-RANLIB="/home/user/emsdk_portable/emscripten/master/emranlib"
+RANLIB="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/emranlib"
 old_postinstall_cmds="chmod 644 \$oldlib~\$RANLIB \$oldlib"
 old_postuninstall_cmds=""
 
@@ -161,7 +161,7 @@ old_postuninstall_cmds=""
 lock_old_archive_extraction=no
 
 # A C compiler.
-LTCC="/home/user/emsdk_portable/emscripten/master/emcc"
+LTCC="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/emcc"
 
 # LTCC compiler flags.
 LTCFLAGS="-O3 -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions"
@@ -275,7 +275,7 @@ hardcode_into_libs=yes
 sys_lib_search_path_spec=" "
 
 # Run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/lib/i386-linux-gnu/mesa /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/x86_64-linux-gnu/mesa /lib32 /usr/lib32 /libx32 /usr/libx32 "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/local/cuda-8.0/targets/x86_64-linux/lib /usr/lib/x86_64-linux-gnu/libfakeroot /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/nvidia-381 /usr/lib32/nvidia-381 /usr/lib/nvidia-381 /usr/lib32/nvidia-381 /lib32 /usr/lib32 "
 
 # Whether dlopen is supported.
 dlopen_support=unknown
@@ -292,7 +292,7 @@ striplib="strip --strip-unneeded"
 
 
 # The linker used to build libraries.
-LD="/home/user/emsdk_portable/emscripten/master/emcc"
+LD="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/emcc"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -302,7 +302,7 @@ reload_cmds="\$LD\$reload_flag -o \$output\$reload_objs"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$oldlib"
 
 # A language specific compiler.
-CC="/home/user/emsdk_portable/emscripten/master/emcc"
+CC="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/emcc"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes
@@ -10081,7 +10081,7 @@ build_old_libs=`case $build_libtool_libs in yes) echo no;; *) echo yes;; esac`
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
 # The linker used to build libraries.
-LD="/home/user/emsdk_portable/emscripten/master/emcc"
+LD="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/emcc"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -10091,7 +10091,7 @@ reload_cmds="\$LD\$reload_flag -o \$output\$reload_objs"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$oldlib"
 
 # A language specific compiler.
-CC="/home/user/emsdk_portable/emscripten/master/em++"
+CC="/home/jinpha/Documents/emsdk-portable/emscripten/incoming/em++"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes

@@ -24,7 +24,7 @@ srcdir = .
 top_srcdir = .
 
 
-prefix = /home/user/libass.js/build/expat/dist
+prefix = /home/jinpha/Projects/JavascriptSubtitlesOctopus/build/expat/dist
 exec_prefix = ${prefix}
 
 bindir = ${exec_prefix}/bin
@@ -104,8 +104,8 @@ mkdir-init:
 		(mkdir $$d 2> /dev/null || test 1) ; \
 	done
 
-CC = /home/user/emsdk_portable/emscripten/master/emcc
-CXX = /home/user/emsdk_portable/emscripten/master/em++
+CC = /home/jinpha/Documents/emsdk-portable/emscripten/incoming/emcc
+CXX = /home/jinpha/Documents/emsdk-portable/emscripten/incoming/em++
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 
 INCLUDES = -I$(srcdir)/lib -I.

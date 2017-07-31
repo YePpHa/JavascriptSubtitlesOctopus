@@ -5,6 +5,7 @@ var SubtitlesOctopus = function (options) {
     self.video = options.video; // HTML video element (optional if canvas specified)
     self.canvasParent = null; // (internal) HTML canvas parent element
     self.fonts = options.fonts || []; // Array with links to fonts used in sub (optional)
+    self.files = options.files || {};
     self.availableFonts = options.availableFonts || []; // Object with all available fonts (optional). Key is font name in lower case, value is link: {"arial": "/font1.ttf"}
     self.onReadyEvent = options.onReady; // Function called when SubtitlesOctopus is ready (optional)
     self.workerUrl = options.workerUrl || 'libassjs-worker.js'; // Link to worker
@@ -54,7 +55,8 @@ var SubtitlesOctopus = function (options) {
             subUrl: self.subUrl,
             subContent: self.subContent,
             fonts: self.fonts,
-            availableFonts: self.availableFonts
+            availableFonts: self.availableFonts,
+            files: self.files
         });
     };
 
@@ -371,6 +373,20 @@ var SubtitlesOctopus = function (options) {
         self.worker.postMessage({
             target: 'video',
             currentTime: currentTime
+        });
+    };
+
+    self.setTrackByUrl = function (url) {
+        self.worker.postMessage({
+            target: 'set-track-by-url',
+            url: url
+        });
+    };
+
+    self.setTrack = function (content) {
+        self.worker.postMessage({
+            target: 'set-track',
+            content: content
         });
     };
 
