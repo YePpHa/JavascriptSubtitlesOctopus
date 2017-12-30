@@ -106,7 +106,8 @@ build/freetype/dist/lib/libfreetype.so:
 	emmake make install
 
 build/expat/expat/configure:
-	cd build/expat/expat && ./buildconf.sh
+	cd build/expat/expat && \
+	./buildconf.sh
 
 build/expat/expat/dist/lib/libexpat.so: build/expat/expat/configure
 	cd build/expat/expat && \
@@ -166,7 +167,8 @@ build/fribidi/configure:
 	git reset --hard && \
 	patch -p1 < ../fribidi-make.patch && \
 	patch -p1 < ../fribidi-fixclang.patch && \
-	./bootstrap
+	./bootstrap && \
+	autoreconf -vif
 
 build/fribidi/dist/lib/libfribidi.so: build/fribidi/configure
 	cd build/fribidi && \
@@ -185,7 +187,8 @@ build/fribidi/dist/lib/libfribidi.so: build/fribidi/configure
 	emmake make install
 
 build/libass/configure:
-	cd build/libass && NOCONFIGURE=1 ./autogen.sh
+	cd build/libass && \
+	NOCONFIGURE=1 ./autogen.sh
 
 # Use --enable-large-tiles to incrase speed?
 build/libass/dist/lib/libass.so: build/libass/configure $(LIBASS_DEPS)
@@ -217,6 +220,7 @@ EMCC_COMMON_ARGS = \
 	-s TOTAL_MEMORY=134217728 \
 	-O3 \
 	-s EXPORTED_FUNCTIONS="['_main', '_malloc', '_libassjs_free_track', '_libassjs_create_track', '_libassjs_init', '_libassjs_quit', '_libassjs_resize', '_libassjs_render']" \
+	-s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'getValue']" \
 	-s NO_EXIT_RUNTIME=1 \
 	--use-preload-plugins \
 	-s ALLOW_MEMORY_GROWTH=1 \

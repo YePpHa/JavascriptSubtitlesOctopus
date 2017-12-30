@@ -5,6 +5,7 @@ var SubtitlesOctopus = function (options) {
     self.video = options.video; // HTML video element (optional if canvas specified)
     self.canvasParent = null; // (internal) HTML canvas parent element
     self.fonts = options.fonts || []; // Array with links to fonts used in sub (optional)
+    self.files = options.files || {};
     self.availableFonts = options.availableFonts || []; // Object with all available fonts (optional). Key is font name in lower case, value is link: {"arial": "/font1.ttf"}
     self.onReadyEvent = options.onReady; // Function called when SubtitlesOctopus is ready (optional)
     self.workerUrl = options.workerUrl || 'libassjs-worker.js'; // Link to worker
@@ -74,7 +75,8 @@ var SubtitlesOctopus = function (options) {
             subUrl: self.subUrl,
             subContent: self.subContent,
             fonts: self.fonts,
-            availableFonts: self.availableFonts
+            availableFonts: self.availableFonts,
+            files: self.files
         });
     };
 
@@ -340,10 +342,8 @@ var SubtitlesOctopus = function (options) {
         }
     };
 
-    self.resize = function (width, height, top, left) {
+    self.resize = function (width, height) {
         var videoSize = null;
-        top = top || 0;
-        left = left || 0;
         if ((!width || !height) && self.video) {
             videoSize = self.getVideoPosition();
             width = videoSize.width * self.pixelRatio;
@@ -356,12 +356,7 @@ var SubtitlesOctopus = function (options) {
             return;
         }
 
-        if (
-          self.canvas.width != width ||
-          self.canvas.height != height ||
-          self.canvas.style.top != top ||
-          self.canvas.style.left != left
-        ) {
+        if (self.canvas.width != width || self.canvas.height != height) {
             self.canvas.width = width;
             self.canvas.height = height;
 
@@ -371,17 +366,16 @@ var SubtitlesOctopus = function (options) {
                 self.canvas.style.position = 'absolute';
                 self.canvas.style.width = videoSize.width + 'px';
                 self.canvas.style.height = videoSize.height + 'px';
-                self.canvas.style.top = top + 'px';
-                self.canvas.style.left = left + 'px';
+                self.canvas.style.left = videoSize.x + 'px';
+                var offset = self.canvasParent.getBoundingClientRect().top - self.video.getBoundingClientRect().top;
+                self.canvas.style.top = (videoSize.y - offset) + 'px';
                 self.canvas.style.pointerEvents = 'none';
             }
 
             self.worker.postMessage({
                 target: 'canvas',
                 width: self.canvas.width,
-                height: self.canvas.height,
-                top: top,
-                left: left
+                height: self.canvas.height
             });
         }
     };
@@ -410,6 +404,20 @@ var SubtitlesOctopus = function (options) {
         self.worker.postMessage({
             target: 'video',
             currentTime: currentTime
+        });
+    };
+
+    self.setTrackByUrl = function (url) {
+        self.worker.postMessage({
+            target: 'set-track-by-url',
+            url: url
+        });
+    };
+
+    self.setTrack = function (content) {
+        self.worker.postMessage({
+            target: 'set-track',
+            content: content
         });
     };
 
