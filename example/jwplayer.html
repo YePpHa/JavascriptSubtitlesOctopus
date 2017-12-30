@@ -16,8 +16,8 @@
     <div id="player">Loading the player...</div>
 </div>
 
-<script src="https://content.jwplatform.com/libraries/L7fM8L0h.js"></script>
-<script src="/js/subtitles-octopus.js"></script>
+<script src="https://content.jwplatform.com/libraries/DbXZPMBQ.js"></script>
+<script src="/js/both/subtitles-octopus.js"></script>
 
 <script>
     // Setup the player
@@ -35,14 +35,10 @@
             var options = {
                 video: video,
                 subUrl: '/example/test.ass',
-                fonts: ['/example/font-1.ttf', '/example/font-2.ttf'],
+                fonts: ['/example/fonts/Arial.ttf', '/example/fonts/TimesNewRoman.ttf'],
                 //onReady: onReadyFunction,
                 //debug: true,
-                workerUrl: '/js/subtitles-octopus-worker.js',
-                files: {
-                    'fonts.conf': { url: '/fonts.conf' },
-                    'default.ttf': { url: '/default.ttf' }
-                }
+                workerUrl: '/js/both/subtitles-octopus-worker.js'
             };
             window.octopusInstance = new SubtitlesOctopus(options); // You can experiment in console
         };
