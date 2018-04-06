@@ -77,10 +77,6 @@ git-libass:
 	git reset --hard && \
 	git clean -dfx && \
 	git pull origin
-
-git-release: libass
-	VER=$(shell git log -1 --pretty=format:"%H") && \
-	tar -czf OctopusSubtitle-$(VER).tgz js
 	
 # host/build flags are used to enable cross-compiling
 # (values must differ) but there should be some better way to achieve
@@ -217,20 +213,16 @@ build/subtitles-octopus/subtitles-octopus-worker.bc: build/subtitles-octopus/con
 	mv subtitlesoctopus subtitles-octopus-worker.bc
 
 EMCC_COMMON_ARGS = \
-	-s TOTAL_MEMORY=134217728 \
 	-O3 \
+	-s TOTAL_MEMORY=134217728 \
+	-s STRICT=1 \
 	-s EXPORTED_FUNCTIONS="['_main', '_malloc', '_libassjs_free_track', '_libassjs_create_track', '_libassjs_init', '_libassjs_quit', '_libassjs_resize', '_libassjs_render']" \
 	-s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'getValue']" \
 	-s NO_EXIT_RUNTIME=1 \
-	--use-preload-plugins \
 	-s ALLOW_MEMORY_GROWTH=1 \
-	--memory-init-file 0 \
 	-s ASSERTIONS=0 \
-	-o $@
-	#--js-opts 0 -g4 \
-	#--closure 1 \
-	#--memory-init-file 0 \
-	#-s OUTLINING_LIMIT=20000 \
+	--use-preload-plugins \
+	--memory-init-file 0
 
 subtitles-octopus-sync.js: build/subtitles-octopus/subtitles-octopus-worker.bc
 	emcc build/subtitles-octopus/subtitles-octopus-worker.bc $(LIBASSJS_DEPS) \
@@ -251,24 +243,21 @@ subtitles-octopus-worker.js: build/subtitles-octopus/subtitles-octopus-worker.bc
 		-s WASM=1 \
 		-s "BINARYEN_METHOD='native-wasm'" \
 		-s "BINARYEN_TRAP_MODE='clamp'" \
+		-o js/wasm/$@ \
 		$(EMCC_COMMON_ARGS) && \
-		mv subtitles-octopus-worker.* js/wasm/ && \
-		cp build/subtitles-octopus/subtitles-octopus.js js/wasm/  && \
 	emcc build/subtitles-octopus/subtitles-octopus-worker.bc $(LIBASSJS_DEPS) \
 		--pre-js build/subtitles-octopus/pre-worker.js \
 		--post-js build/subtitles-octopus/post-worker.js \
 		-s WASM=0 \
 		-s "BINARYEN_METHOD='asmjs'" \
 		-s "BINARYEN_TRAP_MODE='clamp'" \
+		-o js/asmjs/$@ \
 		$(EMCC_COMMON_ARGS) && \
-		mv subtitles-octopus-worker.* js/asmjs/ && \
-		cp build/subtitles-octopus/subtitles-octopus.js js/asmjs/ && \
 	emcc build/subtitles-octopus/subtitles-octopus-worker.bc $(LIBASSJS_DEPS) \
 		--pre-js build/subtitles-octopus/pre-worker.js \
 		--post-js build/subtitles-octopus/post-worker.js \
 		-s WASM=1 \
 		-s "BINARYEN_METHOD='native-wasm,asmjs'" \
 		-s "BINARYEN_TRAP_MODE='clamp'" \
-		$(EMCC_COMMON_ARGS) && \
-		mv subtitles-octopus-worker.* js/both/ && \
-		cp build/subtitles-octopus/subtitles-octopus.js js/both/
+		-o js/both/$@ \
+		$(EMCC_COMMON_ARGS)
